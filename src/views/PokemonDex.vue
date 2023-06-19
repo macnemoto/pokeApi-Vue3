@@ -1,10 +1,11 @@
 <template>
     <img class="rounded mx-auto d-block neko" :src="sprite" alt="" srcset="">
-
     <div class="card m-4" style="width: 18rem;" v-for="pokemon in dataPokemon" :key="pokemon.name">
       <img :src="pokemon.spriteUrl" class="card-img-top" alt="...">
       <div class="card-body">
-        <h2 class="text-center">{{ pokemon.name }}</h2>
+        <h2 class="text-center">
+            <router-link :to="`/pokemon/${ pokemon.name }`"> {{ pokemon.name }} </router-link>
+        </h2>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
       </div>
     </div>
@@ -13,6 +14,7 @@
 <script setup>
 import axios from 'axios'
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const dataPokemon = ref([])
 const sprite = ref('')
