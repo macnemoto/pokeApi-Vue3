@@ -19,7 +19,6 @@ import HelloWorld from './components/HelloWorld.vue'
   </header>
 
   <RouterView />
-  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus dolore maxime optio necessitatibus, quam velit minima cupiditate architecto perferendis ratione officia consequuntur maiores aut doloribus ullam ea, voluptatibus temporibus dolor magnam! Voluptate facilis culpa qui magni. Illum sit rem ad at aut eos perspiciatis voluptatibus nihil earum quod? Maiores, error.</p>
 </template>
 
 <style scoped>
