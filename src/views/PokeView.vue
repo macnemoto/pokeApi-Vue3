@@ -1,14 +1,3 @@
-<template>
-  <div>
-  <div class="text-center">
-    <img :src="poke" alt="" srcset="">
-<h1 class="text-center">Name: {{ $route.params.name }}</h1>
-<h2 :class="['text-center', 'badge', 'p-2', 'fs-2',`badge text-bg-${badgesType}`]"> Type: {{ typePokemon }}</h2>
-</div>
-<button class="flex text-center" @click="back"> Volver </button>
-</div>
-</template>
-
 <script setup>
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -59,3 +48,14 @@ const pokemon = async () => {
 }
 pokemon()
 </script>
+
+<template>
+<div>
+  <div class="text-center">
+    <img :src="poke" alt="" srcset="">
+    <h1 class="text-center">Name: {{ $route.params.name }}</h1>
+    <h2 :class="['text-center', 'badge', 'p-2', 'fs-2',`badge text-bg-${badgesType}`]"> Type: {{ typePokemon }}</h2>
+  </div>
+<button class="flex text-center" @click="back"> Volver </button>
+</div>
+</template>
