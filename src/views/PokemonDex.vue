@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-6 col-md-4 col-lg-3 m-4" v-for="pokemon in dataPokemon" :key="pokemon.name">
         <div class="card m-4 card-pokemon borde-card">
-          <div class="card-body text-bg-dark">
+          <div class="card-body bg-poke-plata">
             <div class="img-container">
               <img :src="pokemon.spriteUrl" class="card-img-top img-card" alt="pokemon">
             </div>
@@ -74,5 +74,10 @@ onMounted(pokeSprite)
   object-fit: contain;
   max-width: 100%;
   max-height: 100%;
+}
+.bg-poke-plata{
+  background-image: url("../assets/plata.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>
