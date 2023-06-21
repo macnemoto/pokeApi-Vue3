@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-sm-6 col-md-4 col-lg-3 m-4" v-for="pokemon in dataPokemon" :key="pokemon.name">
-        <div class="card m-4 card-pokemon borde-card">
-          <div class="card-body bg-poke-plata">
-            <div class="img-container">
+      <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="pokemon in dataPokemon" :key="pokemon.name">
+        <div class="card card-pokemon borde-card ">
+          <div class="card-body text-bg-success">
+            <div class="img-container bg-poke-plata rounded-top">
               <img :src="pokemon.spriteUrl" class="card-img-top img-card" alt="pokemon">
             </div>
             <div class="text-bg-dark">
@@ -64,7 +64,7 @@ onMounted(pokeSprite)
 
 .img-container {
   width: 100%;
-  height: 20rem; /* Establece el alto fijo para todas las imágenes */
+  height: 15rem; /* Establece el alto fijo para todas las imágenes */
   display: flex;
   justify-content: center;
   align-items: center;
