@@ -62,6 +62,8 @@ const pokemon = async () => {
 pokemon()
 </script>
 
+<!-- Template Card Pokemon -->
+
 <template>
 <div>
   <div class="text-center">
@@ -118,5 +120,4 @@ pokemon()
 .text-bg-fairy {
   background-color: #FFB6C1; /* Color adecuado para el tipo "fairy" */
 }
-
 </style>
