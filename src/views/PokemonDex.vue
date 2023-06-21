@@ -1,16 +1,3 @@
-<template>
-    <img class="rounded mx-auto d-block neko" :src="sprite" alt="" srcset="">
-    <div class="card m-4" style="width: 18rem;" v-for="pokemon in dataPokemon" :key="pokemon.name">
-      <img :src="pokemon.spriteUrl" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h2 class="text-center">
-            <router-link class="text-decoration-none" :to="`/pokemon/${ pokemon.name }`"> {{ pokemon.name }} </router-link>
-        </h2>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
-    </div>
-  </template>
-
 <script setup>
 import axios from 'axios'
 import { ref } from 'vue'
@@ -39,9 +26,28 @@ const pokeSprite = async () => {
 pokeSprite()
 </script>
 
+<template>
+
+  <!-- cambio radical -->
+  <div class="container">
+  <div class="row">
+    <div class="col-sm">
+  <div class="card m-4 col-sm" style="width: 18rem;" v-for="pokemon in dataPokemon" :key="pokemon.name">
+    <div class="card-body text-bg-dark rounded">
+      <img :src="pokemon.spriteUrl" class="card-img-top" alt="pokemon">
+      <div class="text-bg-dark">
+      <h2 class="text-center text-bg-light card-header">
+          <router-link class="text-decoration-none" :to="`/pokemon/${ pokemon.name }`"> {{ pokemon.name }} </router-link>
+      </h2>
+      <p class="card-text text-bg-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    </div>
+  </div>
+    </div>
+  </div>
+</div>
+</template>
+
   <style>
-  .neko {
-    height: 20em;
-    width: auto;
-  }
+
   </style>
