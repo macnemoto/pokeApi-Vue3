@@ -11,8 +11,8 @@ import { RouterLink, RouterView } from 'vue-router'
       PokeApi Marcos Con Vue
     </router-link>
     <div>
-      <router-link class="btn btn-primary m-1" to="/">Home</router-link>
-      <router-link  class="btn btn-primary" to="/pokemon">pokemon</router-link>
+      <router-link class="btn btn-success  m-1" to="/">Home</router-link>
+      <router-link  class="btn btn-success  " to="/pokemon">Pokemones</router-link>
     </div>
   </div>
 </nav>

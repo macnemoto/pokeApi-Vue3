@@ -1,25 +1,3 @@
-<template>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="pokemon in dataPokemon" :key="pokemon.name">
-        <div class="card card-pokemon borde-card ">
-          <div class="card-body text-bg-success">
-            <div class="img-container bg-poke-plata rounded-top">
-              <img :src="pokemon.spriteUrl" class="card-img-top img-card" alt="pokemon">
-            </div>
-            <div class="text-bg-dark">
-              <h2 class="text-center text-bg-light card-header">
-                <router-link class="text-decoration-none" :to="`/pokemon/${pokemon.name}`">{{ pokemon.name }}</router-link>
-              </h2>
-              <p class="card-text text-bg-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
 import axios from 'axios'
 import { ref, onMounted } from 'vue'
@@ -45,6 +23,28 @@ const pokeSprite = async () => {
 
 onMounted(pokeSprite)
 </script>
+
+<template>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="pokemon in dataPokemon" :key="pokemon.name">
+        <div class="card card-pokemon borde-card ">
+          <div class="card-body text-bg-dark">
+            <div class="img-container bg-poke-plata rounded-top">
+              <img :src="pokemon.spriteUrl" class="card-img-top img-card" alt="pokemon">
+            </div>
+            <div class="text-bg-dark">
+              <h2 class="text-center text-bg-light card-header">
+                <router-link class="text-decoration-none" :to="`/pokemon/${pokemon.name}`">{{ pokemon.name }}</router-link>
+              </h2>
+              <p class="card-text text-bg-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style>
 .card-pokemon {
