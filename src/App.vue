@@ -1,4 +1,5 @@
 <script setup>
+import MainFooter from './components/MainFooter.vue'
 import { RouterLink, RouterView } from 'vue-router'
 </script>
 
@@ -20,6 +21,7 @@ import { RouterLink, RouterView } from 'vue-router'
 <div class="container text-center">
   <RouterView />
 </div>
+<MainFooter/>
 </template>
 
 <style scoped>

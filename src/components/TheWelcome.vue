@@ -8,6 +8,9 @@ import SupportIcon from './icons/IconSupport.vue'
 </script>
 
 <template>
+  <div class="container">
+    <div class="vh-100">
+
   <WelcomeItem>
     <template #icon>
       <DocumentationIcon />
@@ -83,4 +86,7 @@ import SupportIcon from './icons/IconSupport.vue'
     us by
     <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
   </WelcomeItem>
+</div>
+</div>
+
 </template>
