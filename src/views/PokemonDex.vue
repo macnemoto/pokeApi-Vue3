@@ -8,20 +8,23 @@ const pokeSprite = async () => {
   try {
     const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon')
     dataPokemon.value = data.results
-
-    for (const pokemon of dataPokemon.value) {
-      const pokeData = await axios.get(pokemon.url)
-      const spriteUrl = pokeData.data.sprites.other.dream_world.front_default
-      pokemon.spriteUrl = spriteUrl
-    }
-
-    console.log(dataPokemon.value)
   } catch (e) {
     console.log(e)
   }
 }
 
-onMounted(pokeSprite)
+const getPokemonSpriteUrls = async () => {
+  for (const pokemon of dataPokemon.value) {
+    const pokeData = await axios.get(pokemon.url)
+    const spriteUrl = pokeData.data.sprites.other.dream_world.front_default
+    pokemon.spriteUrl = spriteUrl
+  }
+}
+
+onMounted(async () => {
+  await pokeSprite()
+  await getPokemonSpriteUrls()
+})
 </script>
 
 <template>
