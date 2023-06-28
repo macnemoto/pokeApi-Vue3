@@ -1,28 +1,19 @@
 <script setup>
 import axios from 'axios'
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
+import { useGetData } from '../composables/getdata'
 
-const dataPokemon = ref([])
-
-const pokeSprite = async () => {
-  try {
-    const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon')
-    dataPokemon.value = data.results
-  } catch (e) {
-    console.log(e)
-  }
-}
+const { dataPokemon, pokeSprite } = useGetData()
 
 const getPokemonSpriteUrls = async () => {
   for (const pokemon of dataPokemon.value) {
-    const pokeData = await axios.get(pokemon.url)
-    const spriteUrl = pokeData.data.sprites.other.dream_world.front_default
-    pokemon.spriteUrl = spriteUrl
+    const { data } = await axios.get(pokemon.url)
+    pokemon.spriteUrl = data.sprites.other.dream_world.front_default
   }
 }
 
 onMounted(async () => {
-  await pokeSprite()
+  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
   await getPokemonSpriteUrls()
 })
 </script>

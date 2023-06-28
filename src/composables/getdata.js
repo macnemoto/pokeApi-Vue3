@@ -2,13 +2,14 @@ import axios from 'axios'
 import { ref } from 'vue'
 
 export const useGetData = () => {
-  const data = ref(null)
+  const dataPokemon = ref(null)
 
   // eslint-disable-next-line no-unused-vars
   const pokeSprite = async (url) => {
     try {
-      const res = await axios.get(url)
-      data.value = res.data
+      const { data } = await axios.get(url)
+      dataPokemon.value = data.results
+      await console.log(dataPokemon.value)
     } catch (e) {
       console.log(e)
     }
@@ -16,6 +17,6 @@ export const useGetData = () => {
 
   return {
     pokeSprite,
-    data
+    dataPokemon
   }
 }
