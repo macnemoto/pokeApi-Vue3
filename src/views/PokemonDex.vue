@@ -3,7 +3,7 @@ import axios from 'axios'
 import { onMounted } from 'vue'
 import { useGetData } from '../composables/getdata'
 
-const { data, pokeSprite } = useGetData()
+const { data, pokeSprite, loading } = useGetData()
 
 const getPokemonSpriteUrls = async () => {
   for (const pokemon of data.value) {
@@ -13,30 +13,41 @@ const getPokemonSpriteUrls = async () => {
 }
 
 onMounted(async () => {
-  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=100&offset=151')
+  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0')
   await getPokemonSpriteUrls()
 })
 </script>
 
 <template>
+<div v-if="loading">
   <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="pokemon in data" :key="pokemon.name">
-        <div class="card card-pokemon borde-card ">
-          <div class="card-body text-bg-dark">
-            <div class="img-container bg-poke-plata rounded-top">
-              <img :src="pokemon.spriteUrl" class="card-img-top img-card" alt="pokemon">
-            </div>
-            <div class="text-bg-dark">
-              <h2 class="text-center text-bg-light card-header">
-                <router-link class="text-decoration-none" :to="`/pokemon/${pokemon.name}`">{{ pokemon.name }}</router-link>
-              </h2>
-              <p class="card-text text-bg-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <div class="loader row justify-content-center align-items-center ">
+      <div class="spinner-grow" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>
+</div>
+  <div v-else>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="pokemon in data" :key="pokemon.name">
+          <div class="card card-pokemon borde-card ">
+            <div class="card-body text-bg-dark">
+              <div class="img-container bg-poke-plata rounded-top">
+                <img :src="pokemon.spriteUrl" class="card-img-top img-card" alt="pokemon">
+              </div>
+              <div class="text-bg-dark">
+                <h2 class="text-center text-bg-light card-header">
+                  <router-link class="text-decoration-none" :to="`/pokemon/${pokemon.name}`">{{ pokemon.name }}</router-link>
+                </h2>
+                <p class="card-text text-bg-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+  </div>
   </div>
 </template>
 
@@ -73,5 +84,10 @@ onMounted(async () => {
   background-image: url("../assets/plata.png");
   background-repeat: no-repeat;
   background-size: cover;
+}
+.loader {
+  height: 100vh;
+  overflow-y: auto;
+  max-height: 90vh;
 }
 </style>
