@@ -3,17 +3,17 @@ import axios from 'axios'
 import { onMounted } from 'vue'
 import { useGetData } from '../composables/getdata'
 
-const { dataPokemon, pokeSprite } = useGetData()
+const { data, pokeSprite } = useGetData()
 
 const getPokemonSpriteUrls = async () => {
-  for (const pokemon of dataPokemon.value) {
+  for (const pokemon of data.value) {
     const { data } = await axios.get(pokemon.url)
     pokemon.spriteUrl = data.sprites.other.dream_world.front_default
   }
 }
 
 onMounted(async () => {
-  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
+  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=100&offset=151')
   await getPokemonSpriteUrls()
 })
 </script>
@@ -21,7 +21,7 @@ onMounted(async () => {
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="pokemon in dataPokemon" :key="pokemon.name">
+      <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="pokemon in data" :key="pokemon.name">
         <div class="card card-pokemon borde-card ">
           <div class="card-body text-bg-dark">
             <div class="img-container bg-poke-plata rounded-top">
