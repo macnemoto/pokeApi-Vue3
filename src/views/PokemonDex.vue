@@ -13,7 +13,7 @@ const getPokemonSpriteUrls = async () => {
 }
 
 onMounted(async () => {
-  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0')
+  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
   await getPokemonSpriteUrls()
 })
 </script>

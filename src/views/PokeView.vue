@@ -7,7 +7,6 @@ import { useGetData } from '../composables/getdata'
 const route = useRoute()
 const router = useRouter()
 const { data, pokeSprite } = useGetData()
-console.log('Aqui es como esta inicial mente', data.value)
 
 // Logic
 const typePokemon = ref('')
@@ -50,10 +49,9 @@ const getType = (typeColor, pokemonType) => {
 
 const pokemon = async () => {
   try {
-    console.log('Esto es el', data.value.sprites.other.home.front_default)
     poke.value = data.value.sprites.other.home.front_default
-    pokemonType.value = data.types[0].type.name
-    typePokemon.value = data.types[0].type.name
+    pokemonType.value = data.value.types[0].type.name
+    typePokemon.value = data.value.types[0].type.name
     badgesType.value = await getType(typeColor, pokemonType.value)
   } catch (e) {
     console.log(e)
@@ -63,7 +61,7 @@ const pokemon = async () => {
 onMounted(async () => {
   await pokeSprite(`https://pokeapi.co/api/v2/pokemon/${namePokemon.value}`)
   await pokemon()
-  console.log(data)
+  console.log(data.value)
 })
 </script>
 
