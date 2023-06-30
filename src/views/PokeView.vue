@@ -7,13 +7,14 @@ import { useGetData } from '../composables/getdata'
 const route = useRoute()
 const router = useRouter()
 const { data, pokeSprite } = useGetData()
+console.log('Aqui es como esta inicial mente', data.value)
 
 // Logic
 const typePokemon = ref('')
 const poke = ref({})
 const badgesType = ref('')
 const pokemonType = ref('')
-const namePokemon = ref(`${route.params.name}`)
+const namePokemon = ref(route.params.name)
 const typeColor = {
   fire: 'danger',
   grass: 'success',
@@ -47,32 +48,22 @@ const getType = (typeColor, pokemonType) => {
   } return null
 }
 
-// const busqueda = async () => {
-//   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${route.params.name}`)
-//   const dataQuery = await res.json()
-//   // console.log(dataQuery.sprites.other.home.front_default)
-//   data.value = dataQuery
-// }
-
 const pokemon = async () => {
   try {
     console.log('Esto es el', data.value.sprites.other.home.front_default)
     poke.value = data.value.sprites.other.home.front_default
     pokemonType.value = data.types[0].type.name
-    // console.log(`'aqui esta el tipo' ${pokemonType.value}`)
     typePokemon.value = data.types[0].type.name
     badgesType.value = await getType(typeColor, pokemonType.value)
-    // console.log(`el tipo ahora es:${badgesType.value}`)
   } catch (e) {
-    // console.log(e)
+    console.log(e)
   }
 }
 
 onMounted(async () => {
   await pokeSprite(`https://pokeapi.co/api/v2/pokemon/${namePokemon.value}`)
-  // await busqueda()
   await pokemon()
-  console.log(data.value)
+  console.log(data)
 })
 </script>
 

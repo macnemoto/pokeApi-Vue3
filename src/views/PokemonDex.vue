@@ -7,8 +7,8 @@ const { data, pokeSprite, loading } = useGetData()
 
 const getPokemonSpriteUrls = async () => {
   for (const pokemon of data.value) {
-    const { data } = await axios.get(pokemon.url)
-    pokemon.spriteUrl = data.sprites.other.dream_world.front_default
+    const response = await axios.get(pokemon.url)
+    pokemon.spriteUrl = response.data.sprites.other.dream_world.front_default
   }
 }
 
