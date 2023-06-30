@@ -11,7 +11,7 @@ export const useGetData = () => {
       console.log('La url tomada es:', url)
       const res = await axios.get(url)
       console.log(res.data.name)
-      data.value = await res.data.results
+      data.value = await res.data
     } catch (e) {
       console.log(e)
     } finally {

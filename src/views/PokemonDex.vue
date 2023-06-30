@@ -6,7 +6,7 @@ import { useGetData } from '../composables/getdata'
 const { data, pokeSprite, loading } = useGetData()
 
 const getPokemonSpriteUrls = async () => {
-  for (const pokemon of data.value) {
+  for (const pokemon of data.value.results) {
     const response = await axios.get(pokemon.url)
     pokemon.spriteUrl = response.data.sprites.other.dream_world.front_default
   }
@@ -31,7 +31,7 @@ onMounted(async () => {
   <div v-else>
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="pokemon in data" :key="pokemon.name">
+        <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="pokemon in data.results" :key="pokemon.name">
           <div class="card card-pokemon borde-card ">
             <div class="card-body text-bg-dark">
               <div class="img-container bg-poke-plata rounded-top">
