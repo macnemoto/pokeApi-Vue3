@@ -5,7 +5,6 @@ export const useGetData = () => {
   const data = ref(null)
   const loading = ref(true)
 
-  // eslint-disable-next-line no-unused-vars
   const pokeSprite = async (url) => {
     try {
       // console.log('La url tomada es:', url)

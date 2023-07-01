@@ -1,9 +1,11 @@
 <script setup>
 import axios from 'axios'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useGetData } from '../composables/getdata'
 
 const { data, pokeSprite, loading } = useGetData()
+const pokemonDescription = ref(null)
+const loading2 = ref(true)
 
 const getPokemonSpriteUrls = async () => {
   for (const pokemon of data.value.results) {
@@ -12,9 +14,35 @@ const getPokemonSpriteUrls = async () => {
   }
 }
 
+const getPokemonDescription = async (urlpokemon) => {
+  loading2.value = false
+  try {
+    const response = await fetch(urlpokemon)
+    if (response.ok) {
+      const data = await response.json()
+      const flavorTextEntries = data.flavor_text_entries
+      const spanishFlavorTextEntry = flavorTextEntries.find(entry => entry.language.name === 'es')
+      if (spanishFlavorTextEntry) {
+        const spanishFlavorText = spanishFlavorTextEntry.flavor_text
+        pokemonDescription.value = spanishFlavorText
+        console.log(spanishFlavorText)
+      } else {
+        console.log('No hay descripción')
+      }
+    } else {
+      throw new Error('Error en la solicitud')
+    }
+  } catch (error) {
+    console.error(error)
+  } finally {
+    loading2.value = false
+  }
+}
+
 onMounted(async () => {
   await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
   await getPokemonSpriteUrls()
+  await getPokemonDescription('https://pokeapi.co/api/v2/pokemon-species/metapod')
 })
 </script>
 
@@ -41,7 +69,14 @@ onMounted(async () => {
                 <h2 class="text-center text-bg-light card-header">
                   <router-link class="text-decoration-none" :to="`/pokemon/${pokemon.name}`">{{ pokemon.name }}</router-link>
                 </h2>
-                <p class="card-text text-bg-light">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div v-if="loading2">
+                  <div class="spinner-grow" role="status">
+                   <span class="sr-only"></span>
+                     </div>
+                </div>
+                <div v-else>
+                  <p class="card-text text-bg-light"> {{ pokemonDescription }}</p>
+                </div>
               </div>
             </div>
           </div>
