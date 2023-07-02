@@ -42,7 +42,7 @@ const getPokemonDescription = async (urlpokemon) => {
 onMounted(async () => {
   await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
   await getPokemonSpriteUrls()
-  await getPokemonDescription('https://pokeapi.co/api/v2/pokemon-species/metapod')
+  await getPokemonDescription('https://pokeapi.co/api/v2/pokemon-species/porygon')
 })
 </script>
 
@@ -71,8 +71,8 @@ onMounted(async () => {
                 </h2>
                 <div v-if="loading2">
                   <div class="spinner-grow" role="status">
-                   <span class="sr-only"></span>
-                     </div>
+                  <span class="sr-only"></span>
+                </div>
                 </div>
                 <div v-else>
                   <p class="card-text text-bg-light"> {{ pokemonDescription }}</p>
