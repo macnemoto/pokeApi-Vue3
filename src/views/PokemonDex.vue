@@ -6,6 +6,7 @@ import { useGetData } from '../composables/getdata'
 const { data, pokeSprite, loading } = useGetData()
 const pokemonDescription = ref(null)
 const loading2 = ref(true)
+const dataDescription = ref([])
 
 const getPokemonSpriteUrls = async () => {
   for (const pokemon of data.value.results) {
@@ -14,52 +15,51 @@ const getPokemonSpriteUrls = async () => {
   }
 }
 
-const getPokemonDescription = async (urlpokemon) => {
-  loading2.value = false
-  try {
-    const response = await fetch(urlpokemon)
-    if (response.ok) {
-      const data = await response.json()
-      const flavorTextEntries = data.flavor_text_entries
+// Get description
+const getDescription = async () => {
+  loading2.value = true
+  for (let i = 0; i < data.value.results.length; i++) {
+    try {
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${i + 1}`)
+      const flavorTextEntries = response.data.flavor_text_entries
       const spanishFlavorTextEntry = flavorTextEntries.find(entry => entry.language.name === 'es')
       if (spanishFlavorTextEntry) {
         const spanishFlavorText = spanishFlavorTextEntry.flavor_text
         pokemonDescription.value = spanishFlavorText
-        console.log(spanishFlavorText)
+        dataDescription.value.push(spanishFlavorText)
+        console.log(dataDescription.value)
       } else {
         console.log('No hay descripción')
       }
-    } else {
-      throw new Error('Error en la solicitud')
+    } catch (error) {
+      console.log(error)
+    } finally {
+      loading2.value = false
     }
-  } catch (error) {
-    console.error(error)
-  } finally {
-    loading2.value = false
   }
 }
 
 onMounted(async () => {
   await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
   await getPokemonSpriteUrls()
-  await getPokemonDescription('https://pokeapi.co/api/v2/pokemon-species/porygon')
+  await getDescription()
 })
 </script>
 
 <template>
-<div v-if="loading">
-  <div class="container">
-    <div class="loader row justify-content-center align-items-center ">
-      <div class="spinner-grow" role="status">
-      <span class="visually-hidden">Loading...</span>
+  <div v-if="loading">
+    <div class="container">
+      <div class="loader row justify-content-center align-items-center ">
+        <div class="spinner-grow" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
   <div v-else>
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="pokemon in data.results" :key="pokemon.name">
+        <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="(pokemon, index) in data.results" :key="pokemon.name">
           <div class="card card-pokemon borde-card ">
             <div class="card-body text-bg-dark">
               <div class="img-container bg-poke-plata rounded-top">
@@ -71,18 +71,18 @@ onMounted(async () => {
                 </h2>
                 <div v-if="loading2">
                   <div class="spinner-grow" role="status">
-                  <span class="sr-only"></span>
-                </div>
+                    <span class="sr-only"></span>
+                  </div>
                 </div>
                 <div v-else>
-                  <p class="card-text text-bg-light"> {{ pokemonDescription }}</p>
+                  <p class="card-text text-bg-light"> {{ dataDescription[index] }}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-  </div>
+    </div>
   </div>
 </template>
 
