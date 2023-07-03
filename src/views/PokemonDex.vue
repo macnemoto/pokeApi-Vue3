@@ -4,52 +4,51 @@ import { onMounted, ref } from 'vue'
 import { useGetData } from '../composables/getdata'
 
 const { data, pokeSprite, loading } = useGetData()
-const pokemonDescription = ref(null)
 const loading2 = ref(true)
 const dataDescription = ref([])
 
 const getPokemonSpriteUrls = async () => {
-  for (const pokemon of data.value.results) {
-    const response = await axios.get(pokemon.url)
-    pokemon.spriteUrl = response.data.sprites.other.dream_world.front_default
-  }
+  await Promise.all(
+    data.value.results.map(async (pokemon) => {
+      const response = await axios.get(pokemon.url)
+      pokemon.spriteUrl = response.data.sprites.other.dream_world.front_default
+    })
+  )
 }
 
-// Get description
 const getDescription = async () => {
   loading2.value = true
-  for (let i = 0; i < data.value.results.length; i++) {
-    try {
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${i + 1}`)
-      const flavorTextEntries = response.data.flavor_text_entries
-      const spanishFlavorTextEntry = flavorTextEntries.find(entry => entry.language.name === 'es')
-      if (spanishFlavorTextEntry) {
-        const spanishFlavorText = spanishFlavorTextEntry.flavor_text
-        pokemonDescription.value = spanishFlavorText
-        dataDescription.value.push(spanishFlavorText)
-        console.log(dataDescription.value)
-      } else {
-        console.log('No hay descripción')
+  console.log(data.value.results)
+  await Promise.all(
+    data.value.results.map(async (_, index) => {
+      try {
+        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${index + 1}`)
+        const flavorTextEntries = response.data.flavor_text_entries
+        const spanishFlavorTextEntry = flavorTextEntries.find(entry => entry.language.name === 'es')
+        if (spanishFlavorTextEntry) {
+          const spanishFlavorText = spanishFlavorTextEntry.flavor_text
+          dataDescription.value.push(spanishFlavorText)
+        } else {
+          console.log('No hay descripción')
+        }
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
-    } finally {
-      loading2.value = false
-    }
-  }
+    })
+  )
+  loading2.value = false
 }
 
 onMounted(async () => {
-  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
-  await getPokemonSpriteUrls()
-  await getDescription()
+  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=50&offset=0')
+  await Promise.all([getDescription(), getPokemonSpriteUrls()])
 })
 </script>
 
 <template>
   <div v-if="loading">
     <div class="container">
-      <div class="loader row justify-content-center align-items-center ">
+      <div class="loader row justify-content-center align-items-center">
         <div class="spinner-grow" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
@@ -60,7 +59,7 @@ onMounted(async () => {
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="(pokemon, index) in data.results" :key="pokemon.name">
-          <div class="card card-pokemon borde-card ">
+          <div class="card card-pokemon borde-card">
             <div class="card-body text-bg-dark">
               <div class="img-container bg-poke-plata rounded-top">
                 <img :src="pokemon.spriteUrl" class="card-img-top img-card" alt="pokemon">
