@@ -3,7 +3,7 @@ import axios from 'axios'
 import { onMounted, ref } from 'vue'
 import { useGetData } from '../composables/getdata'
 
-const { data, pokeSprite, loading } = useGetData()
+const { data, pokeSprite, loading, errorData } = useGetData()
 const loading2 = ref(true)
 const dataDescription = ref([])
 
@@ -17,8 +17,7 @@ const getPokemonSpriteUrls = async () => {
 }
 
 const getDescription = async () => {
-  loading2.value = true
-  console.log(data.value.results)
+  // console.log(data.value.results)
   await Promise.all(
     data.value.results.map(async (_, index) => {
       try {
@@ -36,11 +35,10 @@ const getDescription = async () => {
       }
     })
   )
-  loading2.value = false
 }
 
 onMounted(async () => {
-  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=50&offset=0')
+  await pokeSprite('https://pokeapi.co/api/v2/erorr')
   await Promise.all([getDescription(), getPokemonSpriteUrls()])
 })
 </script>
@@ -53,6 +51,12 @@ onMounted(async () => {
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
+    </div>
+  </div>
+  <!-- Error -->
+  <div v-else-if="errorData" class="vh-100 d-flex justify-content-center align-items-center " >
+    <div class="alert alert-danger " role="alert">
+      {{ errorData }} 😓
     </div>
   </div>
   <div v-else>

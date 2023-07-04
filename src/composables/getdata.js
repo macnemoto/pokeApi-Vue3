@@ -4,6 +4,7 @@ import { ref } from 'vue'
 export const useGetData = () => {
   const data = ref(null)
   const loading = ref(true)
+  const errorData = ref(null)
 
   const pokeSprite = async (url) => {
     try {
@@ -12,7 +13,8 @@ export const useGetData = () => {
       // console.log(res.data.name)
       data.value = await res.data
     } catch (e) {
-      console.log(e)
+      errorData.value = 'Error con el host'
+      console.log(errorData.value)
     } finally {
       loading.value = false
     }
@@ -21,6 +23,7 @@ export const useGetData = () => {
   return {
     pokeSprite,
     data,
-    loading
+    loading,
+    errorData
   }
 }
