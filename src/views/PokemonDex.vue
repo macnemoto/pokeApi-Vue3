@@ -17,6 +17,7 @@ const getPokemonSpriteUrls = async () => {
 }
 
 const getDescription = async () => {
+  loading2.value = true
   // console.log(data.value.results)
   await Promise.all(
     data.value.results.map(async (_, index) => {
@@ -32,13 +33,15 @@ const getDescription = async () => {
         }
       } catch (error) {
         console.log(error)
+      } finally {
+        loading2.value = false
       }
     })
   )
 }
 
 onMounted(async () => {
-  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=50&offset=0')
+  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=150&offset=0')
   await Promise.all([getDescription(), getPokemonSpriteUrls()])
 })
 </script>
