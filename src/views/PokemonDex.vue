@@ -41,7 +41,7 @@ const getDescription = async () => {
 }
 
 onMounted(async () => {
-  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=150&offset=0')
+  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=50&offset=0')
   await Promise.all([getDescription(), getPokemonSpriteUrls()])
 })
 </script>
@@ -59,7 +59,7 @@ onMounted(async () => {
   <!-- Error -->
   <div v-else-if="errorData" class="vh-100 d-flex justify-content-center align-items-center " >
     <div class="alert alert-danger " role="alert">
-      {{ errorData }} 😓
+      No hay pokemon 😓
     </div>
   </div>
   <div v-else>

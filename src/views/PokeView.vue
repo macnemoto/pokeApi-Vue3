@@ -6,7 +6,7 @@ import { useGetData } from '../composables/getdata'
 
 const route = useRoute()
 const router = useRouter()
-const { data, pokeSprite } = useGetData()
+const { data, pokeSprite, errorData } = useGetData()
 
 // Logic
 const typePokemon = ref('')
@@ -68,7 +68,12 @@ onMounted(async () => {
 <!-- Template Card Pokemon -->
 
 <template>
-<div>
+    <div v-if="errorData" class="vh-100 d-flex justify-content-center align-items-center " >
+    <div class="alert alert-danger " role="alert">
+      No hay pokemon 😓
+    </div>
+  </div>
+<div v-else>
   <div class="text-center">
     <img :src="poke" alt="" srcset="">
     <h1 class="text-center">Name: {{ $route.params.name }}</h1>
