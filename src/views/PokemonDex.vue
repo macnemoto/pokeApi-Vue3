@@ -38,7 +38,7 @@ const getDescription = async () => {
 }
 
 onMounted(async () => {
-  await pokeSprite('https://pokeapi.co/api/v2/erorr')
+  await pokeSprite('https://pokeapi.co/api/v2/pokemon?limit=50&offset=0')
   await Promise.all([getDescription(), getPokemonSpriteUrls()])
 })
 </script>
