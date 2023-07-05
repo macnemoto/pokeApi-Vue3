@@ -4,7 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div>
+  <div class="bg">
   <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
     <router-link class="navbar-brand" to="/pokemon">
@@ -18,12 +18,14 @@ import { RouterLink, RouterView } from 'vue-router'
   </div>
 </nav>
 </div>
-<div class="container text-center">
+<div class="container-fluid text-center bg">
   <RouterView />
 </div>
 <MainFooter/>
 </template>
 
 <style scoped>
-
+.bg {
+  background-color: #202124;
+}
 </style>
