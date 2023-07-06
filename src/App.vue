@@ -4,9 +4,9 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div class="bg">
-  <nav class="navbar bg-body-tertiary">
-  <div class="container-fluid">
+  <div class="">
+  <nav class="navbar bg-body-tertiary ">
+  <div class="container-fluid ">
     <router-link class="navbar-brand" to="/pokemon">
       <img src="@/assets/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
       PokeApi Marcos Con Vue

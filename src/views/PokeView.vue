@@ -76,10 +76,10 @@ onMounted(async () => {
 <div v-else>
   <div class="text-center">
     <img :src="poke" alt="" srcset="">
-    <h1 class="text-center">Name: {{ $route.params.name }}</h1>
+    <h1 class="text-center text-white m-3">Name: {{ $route.params.name }}</h1>
     <h2 :class="['text-center', 'badge', 'p-3', 'fs-2',`badge text-bg-${badgesType}`]"> Type: {{ typePokemon }}</h2>
   </div>
-<button class="flex text-center btn btn-secondary" @click="back"> Volver </button>
+<button class="flex text-center btn btn-secondary m-4" @click="back"> Volver </button>
 </div>
 </template>
 
