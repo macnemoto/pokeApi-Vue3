@@ -73,16 +73,36 @@ onMounted(async () => {
     </div>
   </div>
 <div v-else>
-  <div class="text-center">
-    <img :src="poke" alt="" srcset="">
-    <h1 class="text-center text-white m-3">Name: {{ $route.params.name }}</h1>
-    <h2 :class="['text-center', 'badge', 'p-3', 'fs-2',`badge text-bg-${badgesType}`]"> Type: {{ typePokemon }}</h2>
+  <div class="container">
+    <div class="d-flex flex-column align-items-center">
+      <div class="mb-3">
+        <div class="card-body bg-primary2 m-4 pb-4 rounded">
+
+          <img :src="poke" alt="" srcset="">
+        </div>
+      </div>
+      <div class="mb-3">
+        <h1 class="text-center text-white m-3">Name: {{ $route.params.name }}</h1>
+        <h2 :class="['text-center', 'badge', 'p-3', 'fs-2',`badge text-bg-${badgesType}`]"> Type: {{ typePokemon }}</h2>
+      </div>
+      <div class="mb-3">
+        <button class="flex text-center btn btn-secondary m-4" @click="back"> Volver </button>
+      </div>
+    </div>
   </div>
-<button class="flex text-center btn btn-secondary m-4" @click="back"> Volver </button>
 </div>
 </template>
 
 <style>
+.bg-primary2{
+  background: linear-gradient(395deg, #08973a, #9f5be4);
+  background-size: 250% 250%;
+  animation: gradientAnimation 10s ease infinite;
+  /* Color defautl */
+  /*   background: linear-gradient(135deg, #957DAD, #A8EDFF);
+  background-size: 200% 200%;
+  animation: gradientAnimation 10s ease infinite; */
+}
 /* En tu archivo de hojas de estilo CSS */
 .text-bg-flying {
   background-color: #87CEEB; /* Color adecuado para el tipo "flying" */
