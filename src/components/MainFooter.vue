@@ -17,6 +17,6 @@
     font-size: 16px;
   }
   .bg-footer{
-    background-color: #000000;
+    background-color: #0a0909;
   }
   </style>

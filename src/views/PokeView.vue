@@ -61,7 +61,6 @@ const pokemon = async () => {
 onMounted(async () => {
   await pokeSprite(`https://pokeapi.co/api/v2/pokemon/${namePokemon.value}`)
   await pokemon()
-  console.log(data.value)
 })
 </script>
 

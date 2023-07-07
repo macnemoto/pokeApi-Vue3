@@ -7,7 +7,7 @@ const { data, pokeSprite, loading, errorData } = useGetData()
 const loading2 = ref(true)
 const dataDescription = ref([])
 const descriptionNumber = ref(1)
-const pokeSpriteUrl = ref('https://pokeapi.co/api/v2/pokemon?limit=3&offset=0')
+const pokeSpriteUrl = ref('https://pokeapi.co/api/v2/pokemon?limit=21&offset=0')
 
 const getPokemonSpriteUrls = async () => {
   await Promise.all(
@@ -23,14 +23,12 @@ const getDescription = async () => {
   await Promise.all(
     data.value.results.map(async (_, index) => {
       try {
-        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${index + descriptionNumber.value}`)
+        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${data.value.results[index].name}`)
         const flavorTextEntries = response.data.flavor_text_entries
         const spanishFlavorTextEntry = flavorTextEntries.find(entry => entry.language.name === 'es')
         if (spanishFlavorTextEntry) {
           const spanishFlavorText = spanishFlavorTextEntry.flavor_text
           dataDescription.value[index] = (spanishFlavorText)
-          // console.log('cada interacion es:' + `${index}`)
-          console.log('numero dos:' + `${index + ' /  Suma / ' + descriptionNumber.value}`)
         } else {
           console.log('No hay descripción')
         }
@@ -53,22 +51,23 @@ const clickMe = async (boton) => {
     await getPokemonSpriteUrls()
     await getOffsetFromUrl(data.value.next)
     await getDescription()
+    console.log(data.value.results[0].name)
   }
 }
 
 // Get number in url
 
 const getOffsetFromUrl = async (url) => {
-  console.log('Esta es la URL que pasas: ' + url)
   const regex = /offset=(\d+)/
   const match = await url.match(regex)
   const offset = await match ? parseInt(match[1]) : null
   descriptionNumber.value = offset
-  // console.log(offset + 'Este es el numero recortado')
 }
 onMounted(async () => {
   await pokeSprite(pokeSpriteUrl.value)
   console.log(data.value.next)
+  console.log(data.value.results)
+
   await Promise.all([getDescription(), getPokemonSpriteUrls()])
 })
 </script>
@@ -117,7 +116,7 @@ onMounted(async () => {
       </div>
     </div>
     <button :disabled="!data.previous" @click="clickMe('boton1')" type="button" class="btn btn-secondary m-4">Previous</button>
-    <button :disabled="!data.next" @click="clickMe('boton2')" type="button" class="btn btn-secondary">Next</button>
+    <button :disabled="!data.next" @click="clickMe('boton2')" type="button" class="btn btn-secondary px-4">Next</button>
   </div>
 </template>
 
