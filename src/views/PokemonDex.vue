@@ -73,6 +73,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <div>
   <div v-if="loading">
     <div class="container">
       <div class="loader row justify-content-center align-items-center">
@@ -83,15 +84,15 @@ onMounted(async () => {
     </div>
   </div>
   <!-- Error -->
-  <div v-else-if="errorData" class="vh-100 d-flex justify-content-center align-items-center " >
-    <div class="alert alert-danger " role="alert">
+  <div v-else-if="errorData" class="vh-100 d-flex justify-content-center align-items-center">
+    <div class="alert alert-danger" role="alert">
       No hay pokemon 😓
     </div>
   </div>
   <div v-else>
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 col-md-3 col-lg-3 m-4" v-for="(pokemon, index) in data.results" :key="pokemon.name">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-4" v-for="(pokemon, index) in data.results" :key="pokemon.name">
           <div class="card card-pokemon borde-card">
             <div class="card-body text-bg-dark">
               <div class="img-container bg-poke-plata rounded-top">
@@ -115,9 +116,34 @@ onMounted(async () => {
         </div>
       </div>
     </div>
-    <button :disabled="!data.previous" @click="clickMe('boton1')" type="button" class="btn btn-secondary m-4">Previous</button>
-    <button :disabled="!data.next" @click="clickMe('boton2')" type="button" class="btn btn-secondary px-4">Next</button>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+          <button :disabled="!data.previous" @click="clickMe('boton1')" type="button" class="btn btn-secondary m-4">Previous</button>
+          <button :disabled="!data.next" @click="clickMe('boton2')" type="button" class="btn btn-secondary px-4">Next</button>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+
+  <!-- Estrutura dos -->
+  <div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+      <!-- Elemento 1 -->
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+      <!-- Elemento 2 -->
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+      <!-- Elemento 3 -->
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+      <!-- Elemento 4 -->
+    </div>
+  </div>
+</div>
 </template>
 
 <style>
