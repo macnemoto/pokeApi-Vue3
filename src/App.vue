@@ -5,15 +5,15 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <div class="">
-  <nav class="navbar bg-body-tertiary ">
+  <nav class="navbar bg-dark ">
   <div class="container-fluid ">
     <router-link class="navbar-brand" to="/pokemon">
       <img src="@/assets/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-      PokeApi Marcos Con Vue
+    <span class="text-light">PokeApi Marcos Con Vue</span>
     </router-link>
     <div>
-      <router-link class="btn btn-success  m-1" to="/">Home</router-link>
-      <router-link  class="btn btn-success  " to="/pokemon">Pokemones</router-link>
+      <router-link class="btn btn-success  m-1" to="/">Pokemones</router-link>
+      <router-link  class="btn btn-success  " to="/pokemon">About</router-link>
     </div>
   </div>
 </nav>
