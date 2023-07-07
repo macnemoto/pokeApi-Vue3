@@ -7,7 +7,7 @@ const { data, pokeSprite, loading, errorData } = useGetData()
 const loading2 = ref(true)
 const dataDescription = ref([])
 const descriptionNumber = ref(1)
-const pokeSpriteUrl = ref('https://pokeapi.co/api/v2/pokemon?limit=40&offset=0')
+const pokeSpriteUrl = ref('https://pokeapi.co/api/v2/pokemon?limit=3&offset=0')
 
 const getPokemonSpriteUrls = async () => {
   await Promise.all(
@@ -29,7 +29,8 @@ const getDescription = async () => {
         if (spanishFlavorTextEntry) {
           const spanishFlavorText = spanishFlavorTextEntry.flavor_text
           dataDescription.value[index] = (spanishFlavorText)
-          console.log(dataDescription.value)
+          // console.log('cada interacion es:' + `${index}`)
+          console.log('numero dos:' + `${index + ' /  Suma / ' + descriptionNumber.value}`)
         } else {
           console.log('No hay descripción')
         }
@@ -63,7 +64,7 @@ const getOffsetFromUrl = async (url) => {
   const match = await url.match(regex)
   const offset = await match ? parseInt(match[1]) : null
   descriptionNumber.value = offset
-  console.log(offset)
+  // console.log(offset + 'Este es el numero recortado')
 }
 onMounted(async () => {
   await pokeSprite(pokeSpriteUrl.value)
