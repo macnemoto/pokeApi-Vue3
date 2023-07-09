@@ -3,11 +3,14 @@
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useGetData } from '../composables/getdata'
+import { useFavoriteStore } from '../store/favorite.js'
 
 const route = useRoute()
 const router = useRouter()
 const { data, pokeSprite, errorData } = useGetData()
+const useFavorites = useFavoriteStore()
 
+const { add, findPoke } = useFavorites
 // Logic
 const typePokemon = ref('')
 const poke = ref({})
@@ -84,6 +87,9 @@ onMounted(async () => {
       <div class="mb-3">
         <h1 class="text-center text-white m-3">Name: {{ $route.params.name }}</h1>
         <h2 :class="['text-center', 'badge', 'p-3', 'fs-2',`badge text-bg-${badgesType}`]"> Type: {{ typePokemon }}</h2>
+      </div>
+      <div class="mb-3">
+        <button class="flex text-center btn btn-danger m-1" @click="add(data)" :disabled="findPoke(data?.name && findPoke(data.name))">Favorito ❤️  </button>
       </div>
       <div class="mb-3">
         <button class="flex text-center btn btn-secondary m-4" @click="back"> Volver </button>
