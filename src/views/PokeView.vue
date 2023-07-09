@@ -89,7 +89,7 @@ onMounted(async () => {
         <h2 :class="['text-center', 'badge', 'p-3', 'fs-2',`badge text-bg-${badgesType}`]"> Type: {{ typePokemon }}</h2>
       </div>
       <div class="mb-3">
-        <button class="flex text-center btn btn-danger m-1" @click="add(data)" :disabled="findPoke(data?.name && findPoke(data.name))">Favorito ❤️  </button>
+        <button class="flex text-center btn btn-danger m-1" @click="add(data)" :disabled="findPoke(data?.name)">Favorito ❤️  </button>
       </div>
       <div class="mb-3">
         <button class="flex text-center btn btn-secondary m-4" @click="back"> Volver </button>

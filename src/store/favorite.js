@@ -12,8 +12,8 @@ export const useFavoriteStore = defineStore('favorite', () => {
     favorites.value = favorites.value.filter(item => item.id !== id)
   }
   const findPoke = (name) => {
-    favorites.value.find((item) => item.name === name)
-    console.log('funciono2')
+    return favorites.value.find((item) => item.name === name)
+    // console.log('funciono2')
   }
 
   return {
