@@ -12,8 +12,9 @@ import { RouterLink, RouterView } from 'vue-router'
     <span class="text-light">PokeApi Marcos Con Vue</span>
     </router-link>
     <div>
-      <router-link class="btn btn-success  m-1" to="/">Pokemones</router-link>
-      <router-link  class="btn btn-success  " to="/pokemon">About</router-link>
+      <router-link  class="btn btn-success  m-1" to="/">Pokemones</router-link>
+      <router-link  class="btn btn-success m-1 " to="/favorite">Favorite</router-link>
+      <router-link class="btn btn-success  m-1" to="/pokemon">About</router-link>
     </div>
   </div>
 </nav>
