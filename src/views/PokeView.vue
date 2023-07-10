@@ -12,6 +12,9 @@ const useFavorites = useFavoriteStore()
 
 const { add, findPoke } = useFavorites
 // Logic
+const prueba = 5
+const prueba2 = ('♡')
+
 const typePokemon = ref('')
 const poke = ref({})
 const badgesType = ref('')
@@ -80,16 +83,18 @@ onMounted(async () => {
     <div class="d-flex flex-column align-items-center">
       <div class="mb-3">
         <div class="card-body bg-primary2 m-4 pb-4 rounded">
-
+          <div class="d-flex justify-content-end">
+            <button class="flex text-center btn btn-danger m-1" @click="add(data)" :disabled="findPoke(data?.name)">
+            <samp v-if="findPoke(data?.name)">❤️</samp>
+            <samp class="emptyHeart" v-else>♡</samp>
+            </button>
+          </div>
           <img :src="poke" alt="" srcset="">
         </div>
       </div>
       <div class="mb-3">
         <h1 class="text-center text-white m-3">Name: {{ $route.params.name }}</h1>
         <h2 :class="['text-center', 'badge', 'p-3', 'fs-2',`badge text-bg-${badgesType}`]"> Type: {{ typePokemon }}</h2>
-      </div>
-      <div class="mb-3">
-        <button class="flex text-center btn btn-danger m-1" @click="add(data)" :disabled="findPoke(data?.name)">Favorito ❤️  </button>
       </div>
       <div class="mb-3">
         <button class="flex text-center btn btn-secondary m-4" @click="back"> Volver </button>
@@ -100,11 +105,19 @@ onMounted(async () => {
 </template>
 
 <style>
+
+.emptyHeart{
+  font-size: 20px;
+
+}
+
 .bg-primary2{
   background: linear-gradient(395deg, #08973a, #9f5be4);
   background-size: 250% 250%;
   animation: gradientAnimation 10s ease infinite;
+
   /* Color defautl */
+
   /*   background: linear-gradient(135deg, #957DAD, #A8EDFF);
   background-size: 200% 200%;
   animation: gradientAnimation 10s ease infinite; */
