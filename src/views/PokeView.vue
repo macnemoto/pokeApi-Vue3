@@ -10,10 +10,8 @@ const router = useRouter()
 const { data, pokeSprite, errorData } = useGetData()
 const useFavorites = useFavoriteStore()
 
-const { add, findPoke } = useFavorites
+const { findPoke, favoritesButton } = useFavorites
 // Logic
-const prueba = 5
-const prueba2 = ('♡')
 
 const typePokemon = ref('')
 const poke = ref({})
@@ -84,7 +82,7 @@ onMounted(async () => {
       <div class="mb-3">
         <div class="card-body bg-primary2 m-4 pb-4 rounded">
           <div class="d-flex justify-content-end">
-            <button class="flex text-center btn btn-danger m-1" @click="add(data)" :disabled="findPoke(data?.name)">
+            <button class="flex text-center btn btn-danger m-1" @click="favoritesButton(data, data.id)">
             <samp v-if="findPoke(data?.name)">❤️</samp>
             <samp class="emptyHeart" v-else>♡</samp>
             </button>
