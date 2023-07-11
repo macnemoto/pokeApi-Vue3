@@ -74,84 +74,91 @@ onMounted(async () => {
 
 <template>
   <div>
-  <div v-if="loading">
-    <div class="container">
-      <div class="loader row justify-content-center align-items-center">
-        <div class="spinner-grow" role="status">
-          <span class="visually-hidden">Loading...</span>
+    <div v-if="loading">
+      <div class="container">
+        <div class="loader row justify-content-center align-items-center">
+          <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Error -->
-  <div v-else-if="errorData" class="vh-100 d-flex justify-content-center align-items-center">
-    <div class="alert alert-danger" role="alert">
-      No hay pokemon 😓
+    <!-- Error -->
+    <div v-else-if="errorData" class="vh-100 d-flex justify-content-center align-items-center">
+      <div class="alert alert-danger" role="alert">
+        No hay pokemon 😓
+      </div>
     </div>
-  </div>
-  <div v-else>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-4" v-for="(pokemon, index) in data.results" :key="pokemon.name">
-          <div class="card card-pokemon borde-card">
-            <div class="card-body text-bg-dark">
-              <div class="img-container bg-poke-plata rounded-top">
-                <img :src="pokemon.spriteUrl" class="card-img-top img-card" alt="pokemon">
-              </div>
-              <div class="text-bg-dark">
-                <h2 class="text-center text-bg-light card-header">
-                  <router-link class="text-decoration-none" :to="`/pokemon/${pokemon.name}`">{{ pokemon.name }}</router-link>
-                </h2>
-                <div v-if="loading2">
-                  <div class="spinner-grow" role="status">
-                    <span class="sr-only"></span>
-                  </div>
+    <div v-else>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3 m-4" v-for="(pokemon, index) in data.results" :key="pokemon.name">
+            <div class="card card-pokemon borde-card">
+              <div class="card-body text-bg-dark">
+                <div class="img-container bg-poke-plata rounded-top">
+                  <img :src="pokemon.spriteUrl" class="card-img-top img-card" alt="pokemon">
                 </div>
-                <div v-else>
-                  <p class="card-text text-bg-light"> {{ dataDescription[index] }}</p>
+                <div class="text-bg-dark">
+                  <h2 class="text-center text-bg-light card-header">
+                    <router-link class="text-decoration-none" :to="`/pokemon/${pokemon.name}`">{{ pokemon.name
+                    }}</router-link>
+                  </h2>
+                  <div v-if="loading2">
+                    <div class="spinner-grow" role="status">
+                      <span class="sr-only"></span>
+                    </div>
+                  </div>
+                  <div v-else>
+                    <p class="card-text text-bg-light"> {{ dataDescription[index] }}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-6">
-          <button :disabled="!data.previous" @click="clickMe('boton1')" type="button" class="btn btn-secondary m-4">Previous</button>
-          <button :disabled="!data.next" @click="clickMe('boton2')" type="button" class="btn btn-secondary px-4">Next</button>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-6">
+            <button :disabled="!data.previous" @click="clickMe('boton1')" type="button"
+              class="btn btn-secondary m-4">Previous</button>
+            <button :disabled="!data.next" @click="clickMe('boton2')" type="button"
+              class="btn btn-secondary px-4">Next</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
   <!-- Estrutura dos -->
   <div class="container">
-  <div class="row">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-      <!-- Elemento 1 -->
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-      <!-- Elemento 2 -->
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-      <!-- Elemento 3 -->
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-      <!-- Elemento 4 -->
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+        <!-- Elemento 1 -->
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+        <!-- Elemento 2 -->
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+        <!-- Elemento 3 -->
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
+        <!-- Elemento 4 -->
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <style>
 .card-pokemon {
-  border: 4px solid #FFCB05; /* Color amarillo para el borde */
-  border-radius: 10px; /* Borde redondeado */
-  border-width: 8px; /* Ancho del borde hacia adentro */
-  border-style: inset; /* Estilo del borde hacia adentro */
+  border: 4px solid #FFCB05;
+  /* Color amarillo para el borde */
+  border-radius: 10px;
+  /* Borde redondeado */
+  border-width: 8px;
+  /* Ancho del borde hacia adentro */
+  border-style: inset;
+  /* Estilo del borde hacia adentro */
   box-shadow: 10px 11px 32px 14px rgba(0, 0, 0, 0.1);
 }
 
@@ -164,7 +171,8 @@ onMounted(async () => {
 
 .img-container {
   width: 100%;
-  height: 15rem; /* Establece el alto fijo para todas las imágenes */
+  height: 15rem;
+  /* Establece el alto fijo para todas las imágenes */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -175,14 +183,15 @@ onMounted(async () => {
   max-width: 100%;
   max-height: 100%;
 }
-.bg-poke-plata{
+
+.bg-poke-plata {
   background-image: url("../assets/plata.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .loader {
   height: 100vh;
   overflow-y: auto;
   max-height: 90vh;
-}
-</style>
+}</style>
